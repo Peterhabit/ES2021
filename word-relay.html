@@ -9,22 +9,67 @@
   </head>
   <body>
     <div><span id="order">1</span>번째 참가자</div>
-    <div>제시어<span id="word"></span></div>
+    <div>제시어: <span id="word"></span></div>
     <input type="text" />
     <button>입력</button>
     <script>
       const number = parseInt(prompt("몇 명이 참가하나요?"), 10);
       alert(number);
       const yesOrNo = confirm("맞나요?");
+      const $button = document.querySelector("button");
+      const $input = document.querySelector("input");
+      const $word = document.querySelector("#word");
+      const $order = document.querySelector("#order");
 
-      document.querySelector("input").addEventLisener("input", (event) => {
-        console.log("글자 입력", event.target.value);
-      });
+      let word; // 제시어
+      let newword; // 새로 입력한 단어
 
-      const onClick = () => {
-        console.log("버튼 클릭");
+      const onClickButton = () => {
+        if (!word) {
+          // 제시어가 비어 있는가?
+          //비어있다
+          word = newword; // 입력한 단어가 제시어가 된다
+          $word.textContent = word;
+
+          const order = parseInt($order.textContent);
+
+          if (order + 1 > number) {
+            $order.textContent = 1;
+          } else {
+            $order.textContent = order + 1;
+          }
+          $input.value = "";
+          $input.focus;
+        } else {
+          //비어 있지 않다
+          if (word[word.length - 1] === newword[0]) {
+            // 올바른가
+            word = newword;
+            $word.textContent = word;
+
+            const order = parseInt($order.textContent);
+            if (order + 1 > number) {
+              $order.textContent = 1;
+            } else {
+              $order.textContent = order + 1;
+            }
+            $input.value = "";
+            $input.focus;
+          } else {
+            // 올바르지 않다
+            alert("올바르지 않는 단어 입니다");
+            $input.value = "";
+            $input.focus;
+          }
+        }
       };
-      document.querySelector("button").addEventListener("click", onClick);
+
+      const onInput = (envent) => {
+        newword = envent.target.value;
+      };
+
+      $button.addEventListener("click", onClickButton);
+      $input.addEventListener("input", onInput);
     </script>
   </body>
 </html>
