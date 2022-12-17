@@ -67,6 +67,9 @@
     //event로 중복 처리
     const onClickNumber = (event) => {
       if (operator) {
+        if (!numTwo) {
+          $result.value = "";
+        }
         numTwo += event.target.textContent;
       } else {
         numOne += event.target.textContent;
