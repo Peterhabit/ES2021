@@ -90,6 +90,27 @@
     document.querySelector("#num-9").addEventListener("click", onClickNumber);
 
     const onClickOperator = (op) => () => {
+      if (numTwo) {
+        //calculate의 다중if문과 같은 소스
+        switch (operator) {
+          case "+":
+            $result.value = parseInt(numOne) + parseInt(numTwo);
+            break;
+          case "-":
+            $result.value = numOne - numTwo;
+            break;
+          case "*":
+            $result.value = numOne * numTwo;
+            break;
+          case "/":
+            $result.value = numOne / numTwo;
+            break;
+          default:
+            break;
+        }
+        numOne = $result.value;
+        numTwo = "";
+      }
       if (numOne) {
         operator = op;
         $operator.value = op;
@@ -123,23 +144,6 @@
         } else {
           alert("올바른 연산자를 입력하세요");
         }
-
-        // switch (operator) {
-        //   case "+":
-        //     $result.value = parseInt(numOne) + parseInt(numTwo);
-        //     break;
-        //   case "-":
-        //     $result.value = numOne - numTwo;
-        //     break;
-        //   case "*":
-        //     $result.value = numOne * numTwo;
-        //     break;
-        //   case "/":
-        //     $result.value = numOne / numTwo;
-        //     break;
-        //   default:
-        //     break;
-        // }
 
         $operator.value = "";
         numOne = $result.value;
