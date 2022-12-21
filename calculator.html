@@ -110,14 +110,6 @@
     document
       .querySelector("#multiply")
       .addEventListener("click", onClickOperator("*"));
-    document.querySelector("#clear").addEventListener("click", () => {
-      // 클리어는 초기상태를 넣어주면 된다
-      numOne = "";
-      operator = "";
-      numTwo = "";
-      $operator.value = "";
-      $result.value = "";
-    });
     document.querySelector("#calculate").addEventListener("click", () => {
       if (numTwo) {
         if (operator == "+") {
@@ -148,9 +140,22 @@
         //   default:
         //     break;
         // }
+
+        $operator.value = "";
+        numOne = $result.value;
+        operator = "";
+        numTwo = "";
       } else {
         alert("숫자를 먼저 입력하세요.");
       }
+    });
+    document.querySelector("#clear").addEventListener("click", () => {
+      // 클리어는 초기상태를 넣어주면 된다
+      numOne = "";
+      operator = "";
+      numTwo = "";
+      $operator.value = "";
+      $result.value = "";
     });
   </script>
 </body>
